@@ -1,0 +1,30 @@
+{
+	"name": "express-api-boilerplate",
+	"version": "0.1.0",
+	"main": "index.js",
+	"author": "Seokjun Kim",
+	"license": "MIT",
+	"scripts": {
+		"test": "sudo node test.js",
+		"start": "sudo node ./node_modules/nodemon/bin/nodemon.js index.js",
+		"serve": "sudo node index.js"
+	},
+	"dependencies": {
+		"bleno": "^0.4.2",
+		"bluebird": "^3.5.0",
+		"body-parser": "^1.17.1",
+		"cookie-parser": "^1.4.3",
+		"express": "^4.15.2",
+		"jsonwebtoken": "^7.3.0",
+		"lodash": "^4.17.4",
+		"moment": "^2.18.1",
+		"rpi-ws281x-native": "^0.8.2",
+		"shortid": "^2.2.8"
+	},
+	"devDependencies": {
+		"eslint": "^3.19.0",
+		"eslint-config-airbnb": "^14.1.0",
+		"eslint-plugin-import": "^2.2.0",
+		"nodemon": "^1.11.0"
+	}
+}
