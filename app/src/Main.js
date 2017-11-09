@@ -2,7 +2,7 @@
 
 import { find, throttle } from 'lodash'
 import React, { Component } from 'react'
-import { View, Text, Button, Dimensions, StyleSheet } from 'react-native'
+import { View, Text, TextInput, Button, Dimensions, StyleSheet } from 'react-native'
 import { BleManager } from 'react-native-ble-plx'
 import base64 from 'base-64'
 
@@ -89,11 +89,45 @@ class Main extends Component {
     })
   }, 100)
 
+  handleInputChange = (key) => (value) => {
+    this.setState({
+      [key]: value,
+    })
+  }
+
+  hanldeWifiPress = () => {
+    ble.send({
+      type: 'WIFI',
+      ssid: this.state.ssid,
+      password: this.state.password,
+    })
+  }
+
   render() {
     const { isReady } = this.state
 
     return (
       <View style={styles.container}>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>SSID</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handleInputChange('ssid')}
+          />
+        </View>
+        <View style={styles.inputWrapper}>
+          <Text style={styles.label}>PW</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={this.handleInputChange('password')}
+          />
+          <Button
+            title="WIFI 접속"
+            disabled={!isReady}
+            onPress={this.hanldeWifiPress}
+          />
+        </View>
+
         <View style={styles.buttonWrapper}>
           <Button
             disabled={!isReady}
@@ -112,7 +146,6 @@ class Main extends Component {
           onColorChange={this.handleColorChange}
           style={styles.colorPicker}
         />
-
       </View>
     )
   }
@@ -131,5 +164,20 @@ const styles = StyleSheet.create({
     width: width - 60,
     marginHorizontal: 30,
     height: 300,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    marginHorizontal: 30,
+    borderBottomColor: 'lightgray',
+    borderBottomWidth: 1,
+  },
+  label: {
+    width: 40,
+    lineHeight: 40,
+  },
+  input: {
+    flex: 1,
+    marginLeft: 10,
+    padding: 10,
   }
 })

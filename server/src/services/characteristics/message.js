@@ -36,7 +36,9 @@ function onWriteRequest (data, offset, withoutResponse, callback) {
         lightService.setColor(message.color)
         break
       case 'WIFI':
-        wifiService.connect(message.ssid, message.password)
+        wifiService
+          .connect(message.ssid, message.password)
+          .catch(console.error)
         break
       default:
         const serviceMethod = lightService[String(type).toLowerCase()]
