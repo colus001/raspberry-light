@@ -7,6 +7,7 @@ const wifiService = require('../wifi')
 const BlenoCharacteristic = bleno.Characteristic
 
 const MessageCharacteristic = function() {
+  // Each characteristic can have read, write, read/write, none authorization rules
   MessageCharacteristic.super_.call(this, {
     uuid: 'ff51b30e-d7e2-4d93-8842-a7c4a57dfb10',
     properties: ['read', 'write'],
@@ -51,6 +52,7 @@ function onWriteRequest (data, offset, withoutResponse, callback) {
   }
 
   callback(this.RESULT_SUCCESS)
+  // callback(this.RESULT_SUCCESS, { data })
 }
 
 MessageCharacteristic.prototype.onWriteRequest = onWriteRequest

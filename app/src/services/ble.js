@@ -110,6 +110,7 @@ const ble = (() => {
       return this
         .getWritableCharacteristic()
         .then(ch => ch.writeWithResponse(base64.encode(serialized)))
+        .then(console.info)
     },
   }
 })()
